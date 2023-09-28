@@ -8,8 +8,12 @@ const data = [
   },
 ];
 
-export default async (fastify) => {
+export default async (fastify, opts) => {
   fastify.get('/', async (request, reply) => {
     return data
   })
+  fastify.post("/", async function (request, reply) {
+    fastify.mockDataInsert(request, opts.prefix.slice(1), data);
+    return data;
+  });
 }
